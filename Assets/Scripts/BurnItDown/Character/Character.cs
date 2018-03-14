@@ -2,6 +2,7 @@
 using BurnItDown.Character.CharacterStates;
 using Flusk.Utility;
 using UnityEngine;
+using Motion = BurnItDown.Character.CharacterStates.Motion;
 
 namespace BurnItDown.Character
 {
@@ -14,6 +15,8 @@ namespace BurnItDown.Character
         public CharacterStateMachine StateMachine;
         private Falling falling;
         private Grounded grounded;
+        private Cutscene cutscene;
+        private Motion motion;
         
         /// <summary>
         /// Initalize the states and add them
@@ -24,11 +27,15 @@ namespace BurnItDown.Character
             
             falling = new Falling();
             grounded = new Grounded();
+            motion = new Motion();
+            cutscene = new Cutscene();
             
             
             // Add states
             StateMachine.AddState(falling);
             StateMachine.AddState(grounded);
+            StateMachine.AddState(motion);
+            StateMachine.AddState(cutscene);
             
         }
     }

@@ -23,5 +23,15 @@ namespace BurnItDown
                 Debug.LogError("GameManager not assigned.");
             }
         }
+
+        protected virtual void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
+        protected static void Destroy(BurnItDownBehaviour behaviour)
+        {
+            behaviour.Destroy();
+        }
     }
 }
