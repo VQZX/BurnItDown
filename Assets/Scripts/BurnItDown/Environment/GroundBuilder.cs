@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BurnItDown.Environment
 {
-    public class GroundBuilder : BurnItDownBehaviour
+    public class GroundBuilder : GridBuilder<GroundBlock>
     {
         [SerializeField]
         protected GroundBlock topGroundBlockTemplate;
@@ -12,28 +12,9 @@ namespace BurnItDown.Environment
         [SerializeField]
         protected GroundBlock bodyGroundBlockTemplate;
 
-        [SerializeField]
-        protected Vector2Int size;
-
-        [SerializeField, HideInInspector]
-        protected List<GroundBlock> generatedBlocks;
-        
 #if UNITY_EDITOR
-        public
-#else
-        private
-#endif
-            void GenerateBlocks()
-        {
-            if (generatedBlocks != null)
-            {
-                generatedBlocks.Run(DestroyBlock);
-            }
-            generatedBlocks = new List<GroundBlock>();
-            Vector2IntUtil.Run(size, CreateBlock);
-        }
 
-        private void CreateBlock(int i, int j)
+        protected override void CreateBlock(int i, int j)
         {
             var selection = (j == 0) ? topGroundBlockTemplate : bodyGroundBlockTemplate;
             var clone = Instantiate(selection, transform);
@@ -49,7 +30,7 @@ namespace BurnItDown.Environment
             rect.DrawRect();
         }
 
-        private void DestroyBlock(GroundBlock block)
+        protected override void DestroyBlock(GroundBlock block)
         {
             block.Destroy();
         }

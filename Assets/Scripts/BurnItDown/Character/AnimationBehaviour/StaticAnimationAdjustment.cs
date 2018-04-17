@@ -1,11 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace BurnItDown.Character.AnimationBehaviour
 {
-	public class AvatarEntrance : BurnItDownStateMachineBehaviour 
+	public class StaticAnimationAdjustment : BurnItDownStateMachineBehaviour
 	{
-		readonly Vector3 offset = new Vector3(-1.51f, 0.35f, 0);
+		[SerializeField]
+		protected Vector3 offset;
 		
 		public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 		{
