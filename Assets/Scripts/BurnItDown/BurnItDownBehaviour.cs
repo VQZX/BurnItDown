@@ -6,6 +6,12 @@ namespace BurnItDown
     {
         protected GameManager gameManager;
 
+        public virtual void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
+        
         /// <summary>
         /// Called by the a manager, this is where any external object or data can be cached 
         /// </summary>
@@ -24,11 +30,7 @@ namespace BurnItDown
             }
         }
 
-        protected virtual void Destroy()
-        {
-            Destroy(gameObject);
-        }
-
+        
         protected static void Destroy(BurnItDownBehaviour behaviour)
         {
             behaviour.Destroy();
