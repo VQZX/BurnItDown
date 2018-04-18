@@ -46,7 +46,6 @@ namespace NeonRattie.Viewing
 
         protected float maxRotation = 10;
 
-        private Vector3 initDirectionToRat;
 
         private Vector3 speedTest;
 
@@ -72,7 +71,6 @@ namespace NeonRattie.Viewing
             {
                 rat = SceneManagement.Instance.Rat;
             }
-            initDirectionToRat = (rat.transform.position - transform.position).normalized;
         }
 
         protected virtual void Update()

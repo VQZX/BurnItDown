@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BurnItDown.Environment
 {
-    public abstract class GridBuilder<T> : BurnItDownBehaviour
+    public abstract class GridBuilder<T> : BurnItDownBehaviour where T : Block
     {
         [SerializeField]
         protected Vector2Int size;

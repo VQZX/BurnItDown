@@ -3,7 +3,7 @@
 namespace BurnItDown.Environment
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    public class GroundBlock : BurnItDownBehaviour
+    public class GroundBlock : Block
     {
         
     }

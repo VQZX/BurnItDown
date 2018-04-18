@@ -12,8 +12,6 @@ namespace BurnItDown.Environment
         [SerializeField]
         protected GroundBlock bodyGroundBlockTemplate;
 
-#if UNITY_EDITOR
-
         protected override void CreateBlock(int i, int j)
         {
             var selection = (j == 0) ? topGroundBlockTemplate : bodyGroundBlockTemplate;
