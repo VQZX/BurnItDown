@@ -16,6 +16,11 @@ namespace BurnItDown.Environment.Grids.Editor
             {
                 builder.GenerateBlocks();
             }
+
+            if (GUILayout.Button("Destroy"))
+            {
+                builder.DestroyBlocks();
+            }
         }
 
         private void OnEnable()

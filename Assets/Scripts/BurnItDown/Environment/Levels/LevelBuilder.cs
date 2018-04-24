@@ -16,6 +16,11 @@ namespace BurnItDown.Environment.Levels
             item.Destroy();
         }
 
+        protected override void DestroyBlockImmediate(LevelBlock item)
+        {
+            item.DestroyImmediate();
+        }
+
         protected override void CreateBlock(int i, int j)
         {
             throw new System.NotImplementedException();

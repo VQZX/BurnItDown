@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Flusk.Utility;
+﻿using Flusk.Utility;
 using UnityEngine;
 
 namespace BurnItDown.Environment
@@ -22,7 +21,7 @@ namespace BurnItDown.Environment
         private void DrawRect(int i, int j)
         {
             Rect rect = new Rect();
-            rect.center = new Vector2(i, -j - 1) + (Vector2)transform.position;
+            rect.center = new Vector2(i, -j - 1) + InitialPosition;
             rect.width = 1;
             rect.height = 1;
             rect.DrawRect();
@@ -30,7 +29,20 @@ namespace BurnItDown.Environment
 
         protected override void DestroyBlock(GroundBlock block)
         {
+            if (block== null)
+            {
+                return;
+            }
             block.Destroy();
+        }
+        
+        protected override void DestroyBlockImmediate(GroundBlock item)
+        {
+            if (item == null)
+            {
+                return;
+            }
+            item.DestroyImmediate();
         }
 
 #if UNITY_EDITOR
