@@ -11,12 +11,10 @@ namespace BurnItDown
             Destroy(gameObject);
         }
         
-#if UNITY_EDITOR
         public virtual void DestroyImmediate()
         {
             DestroyImmediate(gameObject);
         }
-#endif
 
         
         /// <summary>

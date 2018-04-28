@@ -7,7 +7,7 @@ namespace BurnItDown.Environment
     public abstract class GridBuilder<T> : BurnItDownBehaviour where T : Block
     {
         [SerializeField]
-        protected Vector2Int size;
+        protected Vector2Int blockSize;
 
         [SerializeField, HideInInspector]
         protected List<T> generatedBlocks;
@@ -29,7 +29,7 @@ namespace BurnItDown.Environment
         {
             DestroyBlocks();
             generatedBlocks = new List<T>();
-            Vector2IntUtil.Run(size, CreateBlock);
+            Vector2IntUtil.Run(blockSize, CreateBlock);
         }
         
 #if UNITY_EDITOR

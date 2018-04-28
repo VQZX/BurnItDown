@@ -1,50 +1,35 @@
-﻿using MGSA.Grid;
+﻿using BurnItDown.Environment.Grids;
 using UnityEngine;
 
 namespace BurnItDown.Environment.Levels
 {
-    public class LevelBuilderGridCapture : BurnItDownBehaviour
+    public class LevelBuilderGridCapture : BurnItDownGrid<LevelGridData>
     {
-        [SerializeField]
-        protected Vector2 gridBlockSize = new Vector2(1,1);
-
-        [SerializeField]
-        protected bool drawCoords;
-
-        [SerializeField]
-        protected Vector2Int gridDimensions;
-
-        [SerializeField]
-        protected MyGrid grid;
-
-        private new BoxCollider collider;
-        
+#if UNITY_EDITOR
+        public Plane GridPlane { get; set; }
+#endif       
+              
         public Vector2 FirstPosition
         {
-            get { return new Vector2(transform.position.x, transform.position.z) / gridBlockSize.x; }
+            get { return new Vector2(transform.position.x, transform.position.z); }
         }
-        
-        [SerializeField]
-        protected MGSA.Grid.Grids grids;
 
-        public void GenerateGrid()
+#if UNITY_EDITOR
+        public 
+#else
+        private 
+#endif
+            void GenerateGrid(Vector2Int gridDimensions)
         {
-            grid.Grids = new MGSA.Grid.Grids(gridDimensions.x * gridDimensions.y);
-            collider = GetComponent<BoxCollider>();
-            if (collider == null)
-            {
-                collider = gameObject.AddComponent<BoxCollider>();
-            }
-
             // Generate
             for (int i = 0; i < gridDimensions.x; i++)
             {
                 for (int j = 0; j < gridDimensions.y; j++)
                 {
                     Vector2 gridPoint = new Vector2(i, j) + FirstPosition;
-                    GridBlock gridBlock = new GridBlock(grid: grid, position: gridPoint,
-                        gridPosition: new Vector2Int(i, j), size: gridBlockSize.x);
-                    grid.Grids.Add(gridBlock);
+                    //GridBlock gridBlock = new GridBlock(grid: grid, position: gridPoint,
+                        //gridPosition: new Vector2Int(i, j), size: gridBlockSize.x);
+                    //grid.Grids.Add(gridBlock);
                 }
             }
         }

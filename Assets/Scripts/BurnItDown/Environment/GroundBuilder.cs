@@ -52,7 +52,7 @@ namespace BurnItDown.Environment
             const float length = 30;
             Gizmos.DrawLine(position + Vector3.left * length, position + Vector3.right * length);
             Gizmos.DrawLine(position + Vector3.down * length, position + Vector3.up * length);
-            Vector2IntUtil.Run(size, DrawRect);
+            Vector2IntUtil.Run(blockSize, DrawRect);
         }
 #endif
     }

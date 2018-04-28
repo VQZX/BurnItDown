@@ -2,6 +2,7 @@
 
 namespace BurnItDown.Environment.Levels
 {
+    [RequireComponent(typeof(LevelBuilderGridCapture))]
     public class LevelBuilder : GridBuilder<LevelBlock>
     {
         [SerializeField]
@@ -9,6 +10,9 @@ namespace BurnItDown.Environment.Levels
 
         [SerializeField]
         protected LevelBlock roofblock;
+ 
+        [SerializeField]
+        protected Vector2Int gridSize;
         
         
         protected override void DestroyBlock(LevelBlock item)
@@ -23,7 +27,7 @@ namespace BurnItDown.Environment.Levels
 
         protected override void CreateBlock(int i, int j)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

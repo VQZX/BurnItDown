@@ -138,7 +138,8 @@ public class GridEditor : Editor
                     }
                 );
             },
-        block.GetPrettyCoords());
+        block.GetPrettyCoords()
+            );
     }
 
     private void DrawCoordinates()
