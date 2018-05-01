@@ -21,9 +21,9 @@ namespace BurnItDown.Environment
         }
 
 #if UNITY_EDITOR
-        public
+        public virtual 
 #else
-        private
+        protected virtual 
 #endif
             void GenerateBlocks()
         {

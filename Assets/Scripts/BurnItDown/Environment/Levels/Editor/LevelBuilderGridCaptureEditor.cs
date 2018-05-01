@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BurnItDown.Environment.Grids;
+using Flusk.Utility;
 using Grid.Editor;
 using UnityEditor;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace BurnItDown.Environment.Levels.Editor
             public const string BLOCK_SIZE = "blockSize";
         }
         
-        
+#region Fields
         private LevelBuilderGridCapture capture;
         private bool isEditingGridBlocks;
         private LevelGridData currentGridBlock;
@@ -30,14 +31,20 @@ namespace BurnItDown.Environment.Levels.Editor
         private SerializedObject levelBuilderObject;
         private Vector2Int gridSize, blockSize;
         private SerializedProperty gridSizeProperty, blockSizeProperty;
-
+#endregion
+        
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
             
-            if (GUILayout.Button("Generate"))
+            if (GUILayout.Button("Generate Data"))
             {
                 capture.GenerateGrid(gridSize, blockSize); 
+            }
+
+            if (GUILayout.Button("Generate Blocks"))
+            {
+                levelBuilder.GenerateBlocks();
             }
         }
 
@@ -48,6 +55,7 @@ namespace BurnItDown.Environment.Levels.Editor
                 DrawCoordinates();
             }
             ClickingGridBlocks();
+            DrawGrid();
         }
 
 
@@ -72,6 +80,8 @@ namespace BurnItDown.Environment.Levels.Editor
 
             blockSizeProperty = levelBuilderObject.FindProperty(PropertyNames.BLOCK_SIZE);
             blockSize = blockSizeProperty.vector2IntValue;
+            
+            capture.GridPlane = new Plane(Vector3.back, capture.transform.position);
         }
         
         private void DrawCoordinates()
@@ -80,8 +90,22 @@ namespace BurnItDown.Environment.Levels.Editor
             {
                 foreach (LevelGridData block in capture.gridData)
                 {
-                    Handles.Label(block.WorldPoint(), block.PrintCoordinates());
+                    Vector2 point = block.WorldPoint() + block.Size.ToVector2() * 0.5f - Vector2.right * 0.5f;
+                    Handles.Label(point, block.PrintCoordinates());
                 }
+            }
+        }
+
+        private void DrawGrid()
+        {
+            if (capture.gridData == null || capture.gridData.Count == 0)
+            {
+                return;
+            }
+        
+            foreach (LevelGridData block in capture.gridData)
+            {
+                block.DrawBlock();
             }
         }
         
@@ -102,7 +126,6 @@ namespace BurnItDown.Environment.Levels.Editor
                 if (capture.GridPlane.Raycast(ray, out distance))
                 {
                     Vector3 hitPoint = ray.GetPoint(distance);
-                    Debug.Log("Hit Point: "+hitPoint);
                     currentGridBlock = (LevelGridData)capture.FindClosest(hitPoint);
                 }
                 else

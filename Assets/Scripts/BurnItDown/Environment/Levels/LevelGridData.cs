@@ -59,7 +59,13 @@ namespace BurnItDown.Environment.Levels
         {
             get { return blockSecret; }
             private set { blockSecret = value; }
-        }        
+        }  
+        
+        #if UNITY_EDITOR
+        public Texture woodTexture;
+        public Texture roofTexture;
+        #endif
+        
         public LevelGridData(Vector2Int coordinates)
         {
             Coordinates = coordinates;
@@ -93,8 +99,7 @@ namespace BurnItDown.Environment.Levels
         
         public Vector2 WorldPoint()
         {
-            Vector3 worldPosition = rootTransform.position + localPosition;
-            return worldPosition;
+            return rootTransform.position + localPosition;
         }
 
         public Vector3 WorldPoint3()
@@ -109,12 +114,8 @@ namespace BurnItDown.Environment.Levels
 
         public Rect GetRectPoints()
         {
-            Rect rect = new Rect();
-            rect.center = WorldPoint();
-
-            Vector2 pos = WorldPoint() + Size;
-
-            rect = new Rect(pos, Size);
+            Vector2 pos = WorldPoint();
+            Rect rect = new Rect(pos, Size);
             return rect;
         }
       
@@ -151,6 +152,21 @@ namespace BurnItDown.Environment.Levels
         {
             Rect rect = GetRectPoints();
             rect.DrawRectEditor(Color.green);
+        }
+
+        public Texture GetTextureToDraw()
+        {
+            switch (BlockType)
+            {
+                case Type.Wood:
+                    return woodTexture;
+                    break;
+                case Type.Brick:
+                    return roofTexture;
+                    break;
+            }
+
+            return null;
         }
 
         public void DrawBlockEditor()

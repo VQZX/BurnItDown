@@ -32,7 +32,7 @@ namespace BurnItDown.Environment.Grids
         }
         
 #if UNITY_EDITOR
-        private void OnDrawGizmos()
+        protected virtual void OnDrawGizmosSelected()
         {
             if (gridData == null || gridData.Count == 0)
             {
