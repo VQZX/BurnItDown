@@ -31,51 +31,52 @@ namespace BurnItDown.Environment.Levels.Editor
         private Vector2Int gridSize, blockSize;
         private SerializedProperty gridSizeProperty, blockSizeProperty;
 
-        private bool mustDrawCoords;
-
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-
-            mustDrawCoords = EditorGUILayout.Toggle("Must Draw Coords", mustDrawCoords);
             
             if (GUILayout.Button("Generate"))
             {
-                capture.GenerateGrid(blockSize); 
+                capture.GenerateGrid(gridSize, blockSize); 
             }
         }
 
         private void OnSceneGUI()
         {
-            if (mustDrawCoords)
+            if (capture.mustDrawCoords)
             {
                 DrawCoordinates();
             }
+            ClickingGridBlocks();
         }
 
 
         private void OnValidate()
         {
-            gridSize = gridSizeProperty.vector2IntValue;
-            blockSize = blockSizeProperty.vector2IntValue;
+            InitData();
         }
 
         private void OnEnable()
         {
+            InitData();
+        }
+
+        private void InitData()
+        {
             capture = (LevelBuilderGridCapture) target;
             levelBuilder = capture.GetComponent<LevelBuilder>();
             levelBuilderObject = new SerializedObject(levelBuilder);
-            
+
             gridSizeProperty = levelBuilderObject.FindProperty(PropertyNames.GRID_SIZE);
             gridSize = gridSizeProperty.vector2IntValue;
-            
+
             blockSizeProperty = levelBuilderObject.FindProperty(PropertyNames.BLOCK_SIZE);
             blockSize = blockSizeProperty.vector2IntValue;
         }
         
         private void DrawCoordinates()
         {
-            if (mustDrawCoords)
+            if (capture.mustDrawCoords)
             {
                 foreach (LevelGridData block in capture.gridData)
                 {

@@ -8,7 +8,7 @@ namespace BurnItDown.Environment.Grids
     public interface IGridData
     {
         Vector2Int Coordinates { get; set; }
-        float Size { get; set; }
+        Vector2Int Size { get; set; }
 
         Vector2 WorldPoint();
         Vector3 WorldPoint3();

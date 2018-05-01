@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Runtime.Serialization;
 using BurnItDown.Environment.EnvironmentProperty;
 using BurnItDown.Environment.Grids;
 using MGSA;
@@ -8,7 +9,8 @@ using UnityEngine;
 
 namespace BurnItDown.Environment.Levels
 {
-    public class LevelGridData : IGridData
+    [Serializable]
+    public class LevelGridData : IGridData, ISerializable
     {
         public enum Type
         {
@@ -18,21 +20,46 @@ namespace BurnItDown.Environment.Levels
             
             Brick   
         }
-        
-        public Vector2Int Coordinates { get; set; }
 
-        public float Size { get; set; }
+        [SerializeField]
+        private Vector2Int coordinates;
+        public Vector2Int Coordinates
+        {
+            get { return coordinates; }
+            set { coordinates = value; }
+        }
 
+        [SerializeField]
+        private Vector2Int size;
+        public Vector2Int Size
+        {
+            get { return size; }
+            set { size = value; }
+        }
+
+        [SerializeField]
         private Vector3 localPosition;
       
+        [SerializeField]
         private Transform rootTransform;
         
         // Grid Block Data
-        public Type blockType { get; private set; }
-        
-        public BlockFunctionProperty BlockSecret { get; private set; }
-        
-        
+        [SerializeField]
+        private Type blockType;
+
+        public Type BlockType
+        {
+            get { return blockType; }
+            private set { blockType = value; }
+        }
+
+        [SerializeField]
+        private BlockFunctionProperty blockSecret;
+        public BlockFunctionProperty BlockSecret
+        {
+            get { return blockSecret; }
+            private set { blockSecret = value; }
+        }        
         public LevelGridData(Vector2Int coordinates)
         {
             Coordinates = coordinates;
@@ -42,6 +69,26 @@ namespace BurnItDown.Environment.Levels
         {
             rootTransform = transform;
             localPosition = position;
+        }
+
+        public LevelGridData(SerializationInfo info, StreamingContext context)
+        {
+            coordinates = (Vector2Int) info.GetValue("coordinates", typeof(Vector2Int));
+            size = (Vector2Int) info.GetValue("coordinates", typeof(Vector2Int));
+            localPosition = (Vector3) info.GetValue("coordinates", typeof(Vector3));
+            rootTransform = (Transform) info.GetValue("coordinates", typeof(Transform));
+            blockType = (Type) info.GetValue("coordinates", typeof(Type));
+            blockSecret = (BlockFunctionProperty) info.GetValue("coordinates", typeof(BlockFunctionProperty));
+        }
+        
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("coordinates", coordinates, typeof(Vector2Int));
+            info.AddValue("size", size, typeof(Vector2Int));
+            info.AddValue("localPosition", localPosition, typeof(Vector3));
+            info.AddValue("rootTransform", rootTransform, typeof(Transform));
+            info.AddValue("blockType", blockType, typeof(Type));
+            info.AddValue("blockSecret", blockSecret, typeof(BlockFunctionProperty));
         }
         
         public Vector2 WorldPoint()
@@ -65,9 +112,9 @@ namespace BurnItDown.Environment.Levels
             Rect rect = new Rect();
             rect.center = WorldPoint();
 
-            Vector2 pos = WorldPoint() * Size;
+            Vector2 pos = WorldPoint() + Size;
 
-            rect = new Rect(pos, Vector2.one * Size);
+            rect = new Rect(pos, Size);
             return rect;
         }
       
@@ -103,7 +150,13 @@ namespace BurnItDown.Environment.Levels
         public void DrawBlock()
         {
             Rect rect = GetRectPoints();
-            rect.DrawRect(Color.green);
+            rect.DrawRectEditor(Color.green);
+        }
+
+        public void DrawBlockEditor()
+        {
+            Rect rect = GetRectPoints();
+            rect.DrawRectEditor(Color.green);
         }
 #endif
     }

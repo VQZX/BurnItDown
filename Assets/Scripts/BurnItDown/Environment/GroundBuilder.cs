@@ -46,7 +46,7 @@ namespace BurnItDown.Environment
         }
 
 #if UNITY_EDITOR
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             Vector3 position = transform.position;
             const float length = 30;

@@ -5,14 +5,14 @@ namespace Flusk.Utility
 {
     public class Vector2IntUtil
     {
-        private UnityEngine.Vector2Int vector2Int;
+        private Vector2Int vector2Int;
 
-        public Vector2IntUtil(UnityEngine.Vector2Int vector2Int)
+        public Vector2IntUtil(Vector2Int vector2Int)
         {
             this.vector2Int = vector2Int;
         }
 
-        public static void Run(UnityEngine.Vector2Int data, Action<int, int> action)
+        public static void Run(Vector2Int data, Action<int, int> action)
         {
             var container = new Vector2IntUtil(data);
             container.Run(action);
@@ -28,5 +28,7 @@ namespace Flusk.Utility
                 }
             }
         }
+
+        
     }
 }
