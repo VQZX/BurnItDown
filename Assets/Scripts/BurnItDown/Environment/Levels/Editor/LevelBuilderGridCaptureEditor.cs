@@ -4,7 +4,9 @@ using BurnItDown.Environment.Grids;
 using Flusk.Utility;
 using Grid.Editor;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace BurnItDown.Environment.Levels.Editor
 {
@@ -46,6 +48,9 @@ namespace BurnItDown.Environment.Levels.Editor
             {
                 levelBuilder.GenerateBlocks();
             }
+               
+            EditorUtility.SetDirty(capture);
+            EditorUtility.SetDirty(levelBuilder);
         }
 
         private void OnSceneGUI()
@@ -56,6 +61,13 @@ namespace BurnItDown.Environment.Levels.Editor
             }
             ClickingGridBlocks();
             DrawGrid();
+            
+            EditorUtility.SetDirty(capture);
+            EditorUtility.SetDirty(levelBuilder);
+            if (Application.isPlaying)
+            {
+                EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
+            }
         }
 
 

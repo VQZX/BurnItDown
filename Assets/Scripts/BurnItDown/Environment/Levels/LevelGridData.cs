@@ -39,9 +39,23 @@ namespace BurnItDown.Environment.Levels
 
         [SerializeField]
         private Vector3 localPosition;
+
+        public Vector3 LocalPosition
+        {
+            get { return localPosition; }
+        }
+
+        
       
         [SerializeField]
         private Transform rootTransform;
+
+        public Transform RootTransform
+        {
+            get { return rootTransform; }
+        }
+
+        
         
         // Grid Block Data
         [SerializeField]
@@ -61,10 +75,10 @@ namespace BurnItDown.Environment.Levels
             private set { blockSecret = value; }
         }  
         
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         public Texture woodTexture;
         public Texture roofTexture;
-        #endif
+#endif
         
         public LevelGridData(Vector2Int coordinates)
         {
@@ -160,10 +174,8 @@ namespace BurnItDown.Environment.Levels
             {
                 case Type.Wood:
                     return woodTexture;
-                    break;
                 case Type.Brick:
                     return roofTexture;
-                    break;
             }
 
             return null;

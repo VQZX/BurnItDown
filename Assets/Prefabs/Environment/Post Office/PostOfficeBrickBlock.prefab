@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212295755478354720}
   - component: {fileID: 114130038713564172}
   m_Layer: 0
-  m_Name: PostOfficeWallBlock
+  m_Name: PostOfficeBrickBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

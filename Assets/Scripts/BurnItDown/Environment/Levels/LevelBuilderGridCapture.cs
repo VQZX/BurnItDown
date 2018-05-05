@@ -24,6 +24,7 @@ namespace BurnItDown.Environment.Levels
             get { return new Vector2(transform.position.x, transform.position.z); }
         }
         
+        
 #if UNITY_EDITOR
         public
 #else
@@ -65,11 +66,25 @@ namespace BurnItDown.Environment.Levels
                 }
             }
         }
+
+        public LevelGridData GetGridData(int i, int j)
+        {
+            int length = gridData.Count;
+
+            int index = i + j * (length-1);
+        
+            var data =  gridData[index];
+            
+            Debug.LogFormat("Input: ({0},{1}) => {2}", i, j, data.PrintCoordinates());
+
+            return data;
+        }
+        
         
 #if UNITY_EDITOR
         protected override void OnDrawGizmosSelected()
         {
-            base.OnDrawGizmosSelected();
+            //base.OnDrawGizmosSelected();
             if (gridData == null || gridData.Count == 0)
             {
                 return;
@@ -81,7 +96,7 @@ namespace BurnItDown.Environment.Levels
                 Texture texture = block.GetTextureToDraw();
                 if (texture == null)
                 {
-                    return;
+                    continue;
                 }
                 Gizmos.DrawGUITexture(rect, texture);
             }
