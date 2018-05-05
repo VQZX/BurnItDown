@@ -17,6 +17,11 @@ namespace BurnItDown.Environment.Levels
         [SerializeField]
         protected Vector2Int gridSize;
 
+        public Vector2Int GridSize
+        {
+            get { return gridSize; }
+        }
+
         private LevelBuilderGridCapture capture;
 
         protected void Awake()
@@ -27,11 +32,19 @@ namespace BurnItDown.Environment.Levels
         
         protected override void DestroyBlock(LevelBlock item)
         {
+            if (item == null)
+            {
+                return;
+            }
             item.Destroy();
         }
 
         protected override void DestroyBlockImmediate(LevelBlock item)
         {
+            if (item == null)
+            {
+                return;
+            }
             item.DestroyImmediate();
         }
 
@@ -58,18 +71,23 @@ namespace BurnItDown.Environment.Levels
                     block = null;
                     break;
                 case LevelGridData.Type.Wood:
-                    block = Instantiate(woodBlock, transform);
+                    block = Create(woodBlock, transform);
                     break;
                 case LevelGridData.Type.Brick:
-                    block = Instantiate(brickBlock, transform);
+                    block = Create(brickBlock, transform);
                     break;
+            }
+
+            if (block != null)
+            {
+                block.Initialise(data);
             }
             generatedBlocks.Add(block);
         }
 
         private int GetIndex(int i, int j)
         {
-            return i + j * generatedBlocks.Count;
+            return i + j + i * (gridSize.x);
         }
     }
 }

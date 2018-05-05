@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Flusk.Utility;
+using UnityEditor;
 using UnityEngine;
 
 namespace BurnItDown.Environment
@@ -59,6 +60,29 @@ namespace BurnItDown.Environment
             }
 
             generatedBlocks = null;
+        }
+
+        protected R Create<R>(R block, Transform parent) where R : Block
+        {
+#if UNITY_EDITOR
+            var instance = (R) PrefabUtility.InstantiatePrefab(block);
+            instance.transform.SetParent(parent);
+            return instance;
+#else
+            return Instantiate(block, parent);
+#endif
+        }
+
+        protected R Create<R>(R block, Vector3 position, Quaternion rotation, Vector3 scale) where R : Block
+        {
+#if UNITY_EDITOR
+            var instance = (R) PrefabUtility.InstantiatePrefab(block);
+            instance.transform.SetPositionAndRotation(position, rotation);
+            instance.transform.localScale = scale;
+            return instance;
+#else
+            return Instantiate(block, position, rotation, scale);
+#endif
         }
 
         protected abstract void DestroyBlock(T item);

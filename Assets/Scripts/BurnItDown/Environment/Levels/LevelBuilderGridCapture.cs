@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BurnItDown.Environment.Grids;
+using Flusk.Extensions;
 using Flusk.Utility;
 using UnityEngine;
 
@@ -23,7 +24,11 @@ namespace BurnItDown.Environment.Levels
         {
             get { return new Vector2(transform.position.x, transform.position.z); }
         }
-        
+
+
+        private Vector2 gridDimensions;
+
+        private LevelBuilder builder;
         
 #if UNITY_EDITOR
         public
@@ -31,6 +36,9 @@ namespace BurnItDown.Environment.Levels
          private       
 #endif
             bool mustDrawCoords;
+
+        [SerializeField]
+        protected bool drawGUITexture;
 
 #if UNITY_EDITOR
         public
@@ -40,7 +48,7 @@ namespace BurnItDown.Environment.Levels
             void GenerateGrid(Vector2Int gridDimensions, Vector2 blockSize)
         {
             gridData = new List<LevelGridData>();
-
+            this.gridDimensions = gridDimensions;
             Texture woodEdit = Resources.Load<Texture>(PathNames.WOOD_PATH);
             Texture roofEdit = Resources.Load<Texture>(PathNames.ROOF_PATH);
             
@@ -71,12 +79,18 @@ namespace BurnItDown.Environment.Levels
         {
             int length = gridData.Count;
 
-            int index = i + j * (length-1);
-        
-            var data =  gridData[index];
-            
-            Debug.LogFormat("Input: ({0},{1}) => {2}", i, j, data.PrintCoordinates());
+            if (gridDimensions.Multiply() == 0)
+            {
+                if (builder == null)
+                {
+                    builder = GetComponent<LevelBuilder>();
+                }
 
+                gridDimensions = builder.GridSize;
+            }
+            
+            int index = i * (int) gridDimensions.y + j;
+            var data =  gridData[index];
             return data;
         }
         
@@ -85,11 +99,16 @@ namespace BurnItDown.Environment.Levels
         protected override void OnDrawGizmosSelected()
         {
             //base.OnDrawGizmosSelected();
+
+            if (!drawGUITexture)
+            {
+                return;
+            }
             if (gridData == null || gridData.Count == 0)
             {
                 return;
             }
-        
+            
             foreach (LevelGridData block in gridData)
             {
                 Rect rect = block.GetRectPoints();

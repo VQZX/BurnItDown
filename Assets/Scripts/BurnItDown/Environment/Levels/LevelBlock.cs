@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Flusk.Extensions;
+using UnityEngine;
 
 namespace BurnItDown.Environment.Levels
 {
@@ -11,6 +12,7 @@ namespace BurnItDown.Environment.Levels
         {
             this.data = data;
             transform.parent = data.RootTransform;
+            transform.localPosition = data.LocalPosition + (Vector3)data.Size.Multiply(0.5f);
         }
 
         public void ActivateSecret()

@@ -19,6 +19,18 @@ namespace BurnItDown.Environment.Levels.Editor
             public const string GRID_SIZE = "gridSize";
             public const string BLOCK_SIZE = "blockSize";
         }
+
+        class Dialog
+        {
+            public const string TITLE = "Generating Basic Data";
+
+            public const string MESSAGE = "You are about to recreate the grid data using only the dimensions. " +
+                                          "\nAre you sure?";
+
+            public const string CONFIRM = "CONFIRM";
+
+            public const string CANCEL = "Cancel";
+        }
         
 #region Fields
         private LevelBuilderGridCapture capture;
@@ -41,7 +53,11 @@ namespace BurnItDown.Environment.Levels.Editor
             
             if (GUILayout.Button("Generate Data"))
             {
-                capture.GenerateGrid(gridSize, blockSize); 
+                bool confirm = EditorUtility.DisplayDialog(Dialog.TITLE, Dialog.MESSAGE, Dialog.CONFIRM, Dialog.CANCEL);
+                if (confirm)
+                {
+                    capture.GenerateGrid(gridSize, blockSize); 
+                }
             }
 
             if (GUILayout.Button("Generate Blocks"))
