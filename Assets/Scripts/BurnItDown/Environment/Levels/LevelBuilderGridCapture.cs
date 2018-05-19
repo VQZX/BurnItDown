@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BurnItDown.Environment.Grids;
 using Flusk.Extensions;
 using Flusk.Utility;
@@ -77,9 +78,7 @@ namespace BurnItDown.Environment.Levels
 
         public LevelGridData GetGridData(int i, int j)
         {
-            int length = gridData.Count;
-
-            if (gridDimensions.Multiply() == 0)
+            if (Math.Abs(gridDimensions.Multiply()) <= float.Epsilon)
             {
                 if (builder == null)
                 {

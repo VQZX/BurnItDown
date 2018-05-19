@@ -1,9 +1,8 @@
-﻿using System;
-using BurnItDown.Character.CharacterStates;
+﻿using BurnItDown.Character.CharacterStates;
 using BurnItDown.Character.Components;
-using Flusk.Animation;
 using UnityEngine;
 using Motion = BurnItDown.Character.CharacterStates.Motion;
+using StateName = BurnItDown.Character.CharacterStates.CharacterStates;
 
 namespace BurnItDown.Character
 {
@@ -52,12 +51,11 @@ namespace BurnItDown.Character
             motion = new Motion();
             cutscene = new Cutscene();
 
-
             // Add states
-            StateMachine.AddState(falling);
-            StateMachine.AddState(grounded);
-            StateMachine.AddState(motion);
-            StateMachine.AddState(cutscene);
+            StateMachine.AddState(StateName.Falling, falling);
+            StateMachine.AddState(StateName.Grounded, grounded);
+            StateMachine.AddState(StateName.Motion, motion);
+            StateMachine.AddState(StateName.Cutscene, cutscene);
         }
 
         protected void FixedUpdate()

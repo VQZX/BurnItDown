@@ -1,4 +1,5 @@
 ﻿using System;
+using BurnItDown.Character.Components;
 using UnityEngine;
 
 namespace BurnItDown.Character
@@ -7,15 +8,15 @@ namespace BurnItDown.Character
     public class CharacterConfiguration
     {
         [SerializeField]
-        protected Transform footPosition;
-        public Transform FootPosition {get { return footPosition; }}
+        protected Foot footPosition;
+        public Foot FootPosition {get { return footPosition; }}
 
         [SerializeField]
-        protected Transform headPosition;
-        public Transform HeadPosition {get { return headPosition; }}
+        protected Head headPosition;
+        public Head HeadPosition {get { return headPosition; }}
 
         [SerializeField]
-        protected Rigidbody mainRigidbody;
-        public Rigidbody MainRigidbody { get { return mainRigidbody; } }
+        protected Rigidbody2D mainRigidbody;
+        public Rigidbody2D MainRigidbody { get { return mainRigidbody; } }
     }
 }

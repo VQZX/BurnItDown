@@ -56,6 +56,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4761221020059904}
+  - component: {fileID: 114443627206710780}
   m_Layer: 0
   m_Name: Foot
   m_TagString: Untagged
@@ -87,6 +88,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4987364726639518}
+  - component: {fileID: 114791218571852970}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -274,6 +276,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 15
   speed: 10
+--- !u!114 &114443627206710780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1794694198035706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947f575c876c495594b1055f7f63d952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114791218571852970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1946291832184738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d5fc547f1c4904805eba6b31aec639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114946051512991674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -286,11 +310,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configuration:
-    footPosition: {fileID: 0}
-    headPosition: {fileID: 0}
-    mainRigidbody: {fileID: 0}
+    footPosition: {fileID: 114443627206710780}
+    headPosition: {fileID: 114791218571852970}
+    mainRigidbody: {fileID: 50142612514885936}
   speed: 10
-  avatar: {fileID: 0}
+  avatar: {fileID: 4881861555702278}
 --- !u!212 &212535849775693086
 SpriteRenderer:
   m_ObjectHideFlags: 1

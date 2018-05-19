@@ -2,7 +2,7 @@
 
 namespace BurnItDown.Character.CharacterStates
 {
-    public class CharacterStateMachine : StateMachine<State>
+    public class CharacterStateMachine : KeyStateMachine<CharacterStates, State>
     {
         private readonly Character character;
         
@@ -11,9 +11,9 @@ namespace BurnItDown.Character.CharacterStates
             this.character = character;
         }
         
-        public virtual void Add(State state)
+        public override void AddState(CharacterStates key, State state)
         {
-            base.AddState(state);
+            base.AddState(key, state);
             state.SetCharacter(character);
             state.SetStateMachine(this);
         }
