@@ -8,10 +8,13 @@ namespace BurnItDown.Character
 
         public AvatarAnimator Animator { get; private set; }
 
+        private float defaultFacingSign;
+
         protected virtual void Awake()
         {   
             Animator = new AvatarAnimator(gameObject);
             Animator.Entrance();
+            defaultFacingSign = Mathf.Sign(transform.localScale.x);
         }
 
         public void AdjustLocalPosition(Vector3 offset)
@@ -22,6 +25,20 @@ namespace BurnItDown.Character
         public void ResetLocalPosition()
         {
             transform.localPosition = Vector3.zero;
+        }
+
+        public void FaceRight()
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = defaultFacingSign * Mathf.Abs(scale.x);
+            transform.localScale = scale;
+        }
+
+        public void FaceLeft()
+        {
+            Vector3 scale = transform.localScale;
+            scale.x = -defaultFacingSign * Mathf.Abs(scale.x);
+            transform.localScale = scale;
         }
     }
     

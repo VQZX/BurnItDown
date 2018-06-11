@@ -63,11 +63,13 @@ namespace BurnItDown.Character
             if (Input.GetKey(KeyCode.D))
             {
                 Locomotion.Push(Vector2.right * speed);
+                AvatarDisplay.FaceRight();
             }
 
             if (Input.GetKey(KeyCode.A))
             {
                 Locomotion.Push(Vector2.left * speed);
+                AvatarDisplay.FaceLeft();
             }
 
             AvatarDisplay.Animator.Speed = Locomotion.Speed;
