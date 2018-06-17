@@ -58,18 +58,26 @@ namespace BurnItDown.Character
             StateMachine.AddState(StateName.Cutscene, cutscene);
         }
 
+        /// <summary>
+        /// Generalise this
+        /// </summary>
         protected void FixedUpdate()
         {
             if (Input.GetKey(KeyCode.D))
             {
-                Locomotion.Push(Vector2.right * speed);
+                Locomotion.SetSpeed(Vector2.right * speed);
                 AvatarDisplay.FaceRight();
             }
 
             if (Input.GetKey(KeyCode.A))
             {
-                Locomotion.Push(Vector2.left * speed);
+                Locomotion.SetSpeed(Vector2.left * speed);
                 AvatarDisplay.FaceLeft();
+            }
+
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+            {
+                Locomotion.SetSpeed(Vector3.zero);
             }
 
             AvatarDisplay.Animator.Speed = Locomotion.Speed;

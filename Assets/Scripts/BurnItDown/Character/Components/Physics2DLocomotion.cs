@@ -17,6 +17,16 @@ namespace BurnItDown.Character.Components
         }
         
         private new Rigidbody2D rigidbody2D;
+
+        public void SetSpeed(Vector3 velocity)
+        {
+            if (Mathf.Abs(velocity.magnitude) >= maxSpeed)
+            {
+                return;
+            }
+
+            rigidbody2D.velocity = velocity;
+        }
         
         public void Push(Vector3 push)
         {
