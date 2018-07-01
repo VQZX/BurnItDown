@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Flusk.Utility;
-using Flusk.Management;
+﻿using Flusk.Management;
 using Flusk.Utility;
 using NeonRattie.Controls;
 using UnityEngine;

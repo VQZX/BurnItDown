@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using BurnItDown.Characters;
+using UnityEngine;
 
 namespace BurnItDown
 {
     public class BurnItDownLevelManager : LevelManager
     {
         [SerializeField]
-        protected Character.Character player;
+        protected Character player;
 
-        public Character.Character Player
+        public Character Player
         {
             get { return player; }
         }

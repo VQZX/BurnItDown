@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.NetworkInformation;
+using Flusk.Attributes;
 using Flusk.Controls;
 using Flusk.Management;
 using NeonRattie.Controls;

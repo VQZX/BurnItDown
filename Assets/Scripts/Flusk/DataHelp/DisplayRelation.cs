@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using Flusk.Attributes;
 using UnityEngine;
 
 namespace Flusk.DataHelp

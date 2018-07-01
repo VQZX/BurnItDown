@@ -5,6 +5,9 @@
     /// </summary>
     public class FlameThrower : BurnMechanism
     {
-        
+        public override void Burn()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
