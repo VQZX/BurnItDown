@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Flusk.Structures
 {
@@ -22,6 +23,11 @@ namespace Flusk.Structures
         public bool WithinRange(float x)
         {
             return (x <= Max && x >= Min);
+        }
+
+        public float Random()
+        {
+            return UnityEngine.Random.Range(Min, Max);
         }
 
     }

@@ -46,12 +46,13 @@ namespace BurnItDown.Burn.Mechanisms
             }
 
             int index = Random.Range(0, list.Count);
-            Instantiate(fireTemplate, list[index].BurnPoint() - Vector3.forward, transform.rotation);
+            var fire = Instantiate(fireTemplate, list[index].BurnPoint() - Vector3.forward, transform.rotation);
+            list[index].SetAlight(list[index].BurnPoint(), fire);
         }
 
         private void FixedUpdate()
         {
-            if (Input.GetKeyDown(activateKeyCode))
+            if (Input.GetMouseButtonDown(0))
             {
                 timer = new Timer(timeBetweenBurns, Burn);
             }

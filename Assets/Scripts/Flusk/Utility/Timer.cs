@@ -6,8 +6,8 @@ namespace Flusk.Utility
     {
         public Action Complete;
 
-        private float time = 0;
-        private float goal = 0;
+        protected float time = 0;
+        protected float goal = 0;
 
         public Timer (float time, Action onComplete = null )
         {
@@ -15,7 +15,7 @@ namespace Flusk.Utility
             Complete = onComplete;
         }
 
-        public void Tick (float deltaTime)
+        public virtual void Tick (float deltaTime)
         {
             time += deltaTime;
             if ( time > goal )

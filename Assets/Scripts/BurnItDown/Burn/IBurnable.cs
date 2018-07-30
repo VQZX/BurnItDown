@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BurnItDown.Burn.Burners;
+using UnityEngine;
 
 namespace BurnItDown.Burn
 {
@@ -7,8 +8,20 @@ namespace BurnItDown.Burn
     /// </summary>
     public interface IBurnable
     {
-        void SetAlight(Vector3 position);
+        void SetAlight(Vector3 position, IFire fire);
 
         Vector3 BurnPoint();
+
+        void RegisterBurn();
+
+        void Extinguish();
+        
+        BurnContainer BurnContainer { get; }
+        
+        GameObject BurningObject { get; }
+
+        IBurnable FindNeighbour();
+        
+        void FindNeighbour(out IBurnable burnable, out IFire fire);
     }
 }
