@@ -36,7 +36,6 @@ namespace BurnItDown.Burn.Mechanisms
         {
             Collider2D[] collection = Physics2D.OverlapCircleAll(touchBurnPoint.position, radius);
             List<IBurnable> list = new List<IBurnable>();
-Debug.Log(list.Count);
             foreach (var collider in collection)
             {
                 var burnable = collider.GetComponent<IBurnable>();

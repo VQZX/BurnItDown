@@ -29,6 +29,11 @@ namespace BurnItDown.Environment.Levels
             BurnManager.Instance.UnregisterBurn(this);
         }
 
+        public bool IsOnFire()
+        {
+            return BurnContainer.HasFire;
+        }
+
         public IBurnable FindNeighbour()
         {
             float radius = collider2D.size.magnitude;
@@ -39,7 +44,7 @@ namespace BurnItDown.Environment.Levels
                 foreach (var collider in colliders)
                 {
                     var burnable = collider.GetComponent<IBurnable>();
-                    if (burnable != null)
+                    if (burnable != null && (LevelBlock) burnable != this && !burnable.IsOnFire())
                     {
                         burnables.Add(burnable);
                     }
@@ -59,12 +64,19 @@ namespace BurnItDown.Environment.Levels
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(fireStarter.FireObject.transform.position, radius);
                 foreach (var collider in colliders)
                 {
-                    var burn = collider.GetComponent<IBurnable>();
-                    if (burn != null)
+                    var possibleBurnable = collider.GetComponent<IBurnable>();
+                    if (possibleBurnable != null && (LevelBlock) possibleBurnable != this && !possibleBurnable.IsOnFire())
                     {
-                        burnableFires.Add(new BurnableFire(burn, fireStarter));
+                        burnableFires.Add(new BurnableFire(possibleBurnable, fireStarter));
                     }
                 }
+            }
+
+            if (burnableFires.Count == 0)
+            {
+                fire = null;
+                burnable = null;
+                return;
             }
 
             int index = Random.Range(0, burnableFires.Count);
@@ -95,7 +107,6 @@ namespace BurnItDown.Environment.Levels
         {
             fire.Burn(position);
             BurnContainer.Add(fire);
-Debug.LogFormat("Set Alight: {0}", this);
             RegisterBurn();
         }
 

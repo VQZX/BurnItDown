@@ -7,6 +7,11 @@ namespace BurnItDown.Burn
     public class BurnContainer : IList<IFire>
     {
         public int MAX_AMOUNT = 3;
+
+        public bool HasFire
+        {
+            get { return (fires != null && fires.Count > 0); }
+        }
         
         private List<IFire> fires = new List<IFire>();
 

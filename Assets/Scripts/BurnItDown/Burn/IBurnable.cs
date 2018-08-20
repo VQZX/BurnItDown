@@ -23,5 +23,7 @@ namespace BurnItDown.Burn
         IBurnable FindNeighbour();
         
         void FindNeighbour(out IBurnable burnable, out IFire fire);
+
+        bool IsOnFire();
     }
 }

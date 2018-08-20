@@ -31,7 +31,6 @@ namespace BurnItDown.Burn.Spreading
         {
 
             var random = range.Random();
-Debug.Log("Random: "+range+" "+random);
             var timer = new FireSpreadTimer(burnable, random);
             burnableTimers.Add(new BurnableTimers(burnable, timer));
         }
@@ -59,8 +58,10 @@ Debug.Log("Random: "+range+" "+random);
 
         protected virtual void Update()
         {
-            foreach (var spreadTimer in burnableTimers)
+            var count = burnableTimers.Count;
+            for (var i= 0; i < count; i++)
             {
+                BurnableTimers spreadTimer = burnableTimers[i];
                 spreadTimer.Timer.Tick(Time.deltaTime);
             }
         }

@@ -15,7 +15,6 @@ namespace BurnItDown.Burn.Spreading
             this.burnable = burnable;
             Complete = RepeatFire;
             
-Debug.Log("Repeat Fire: "+time);
         }
 
         public void RepeatFire()
@@ -23,16 +22,20 @@ Debug.Log("Repeat Fire: "+time);
             IBurnable neighbour;
             IFire fire;
             burnable.FindNeighbour(out neighbour, out fire);
-
+            if (neighbour == null || fire == null)
+            {
+                currentTime = 0;
+                return;
+            }
             Vector3 position = neighbour.BurnPoint();
-
+            
             GameObject newFireObject = Object.Instantiate(fire.FireObject);
+            newFireObject.name = fire.FireObject.name;
             IFire newFire = newFireObject.GetComponent<IFire>();
             
             neighbour.SetAlight(position, newFire);
 
-            Debug.Log("Repeat Fire "+currentTime+" "+goalTime);
-            
+                        
             currentTime = 0;
         }
     }

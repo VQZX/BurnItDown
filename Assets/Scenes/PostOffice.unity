@@ -13477,8 +13477,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range:
-    Min: 5
-    Max: 10
+    Min: 1
+    Max: 5
 --- !u!114 &1248922721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15109,6 +15109,11 @@ Prefab:
         type: 2}
       propertyPath: timeBetweenBurns
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114368973593667370, guid: 877990054a39e2647a0575037deeccc4,
+        type: 2}
+      propertyPath: radius
+      value: 1.09
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 877990054a39e2647a0575037deeccc4, type: 2}
