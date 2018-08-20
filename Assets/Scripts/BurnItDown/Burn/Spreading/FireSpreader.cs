@@ -29,7 +29,10 @@ namespace BurnItDown.Burn.Spreading
         /// <param name="burnable"></param>
         public void Add(IBurnable burnable)
         {
-            var timer = new FireSpreadTimer(burnable, range.Random());
+
+            var random = range.Random();
+Debug.Log("Random: "+range+" "+random);
+            var timer = new FireSpreadTimer(burnable, random);
             burnableTimers.Add(new BurnableTimers(burnable, timer));
         }
 

@@ -28,19 +28,6 @@ namespace BurnItDown.Characters.Components
             rigidbody2D.velocity = velocity;
         }
         
-        public void Push(Vector3 push)
-        {
-            rigidbody2D.AddForce(push);
-            if (Math.Abs(maxSpeed) < float.Epsilon)
-            {
-                return;
-            }
-
-            if (rigidbody2D.velocity.magnitude > maxSpeed)
-            {
-                rigidbody2D.velocity = rigidbody2D.velocity.normalized * maxSpeed;
-            }
-        }
 
         protected virtual void Awake()
         {

@@ -95,7 +95,7 @@ namespace BurnItDown.Environment.Levels
         {
             fire.Burn(position);
             BurnContainer.Add(fire);
-            Debug.LogFormat("Set Alight: {0}", this);
+Debug.LogFormat("Set Alight: {0}", this);
             RegisterBurn();
         }
 

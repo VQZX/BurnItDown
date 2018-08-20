@@ -36,6 +36,7 @@ namespace BurnItDown.Burn.Mechanisms
         {
             Collider2D[] collection = Physics2D.OverlapCircleAll(touchBurnPoint.position, radius);
             List<IBurnable> list = new List<IBurnable>();
+Debug.Log(list.Count);
             foreach (var collider in collection)
             {
                 var burnable = collider.GetComponent<IBurnable>();
@@ -45,6 +46,10 @@ namespace BurnItDown.Burn.Mechanisms
                 }
             }
 
+            if (list.Count == 0)
+            {
+                return;
+            }
             int index = Random.Range(0, list.Count);
             var fire = Instantiate(fireTemplate, list[index].BurnPoint() - Vector3.forward, transform.rotation);
             list[index].SetAlight(list[index].BurnPoint(), fire);
@@ -54,9 +59,9 @@ namespace BurnItDown.Burn.Mechanisms
         {
             if (Input.GetMouseButtonDown(0))
             {
-                timer = new Timer(timeBetweenBurns, Burn);
+                    timer = new Timer(timeBetweenBurns, Burn);
             }
-            else
+            else if ( Input.GetMouseButtonUp(0))
             {
                 timer = null;
             }

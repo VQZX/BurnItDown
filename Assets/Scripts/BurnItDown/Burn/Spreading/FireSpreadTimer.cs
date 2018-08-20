@@ -14,6 +14,8 @@ namespace BurnItDown.Burn.Spreading
         {
             this.burnable = burnable;
             Complete = RepeatFire;
+            
+Debug.Log("Repeat Fire: "+time);
         }
 
         public void RepeatFire()
@@ -29,9 +31,9 @@ namespace BurnItDown.Burn.Spreading
             
             neighbour.SetAlight(position, newFire);
 
-            Debug.Log("Repeat Fire");
+            Debug.Log("Repeat Fire "+currentTime+" "+goalTime);
             
-            time = 0;
+            currentTime = 0;
         }
     }
 }

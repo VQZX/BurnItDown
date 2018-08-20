@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Flusk.Utility
 {
@@ -6,19 +7,20 @@ namespace Flusk.Utility
     {
         public Action Complete;
 
-        protected float time = 0;
-        protected float goal = 0;
+        protected float currentTime = 0;
+        protected readonly float goalTime = 0;
 
         public Timer (float time, Action onComplete = null )
         {
-            this.time = time;
+            currentTime = 0;
+            goalTime = time;
             Complete = onComplete;
         }
 
         public virtual void Tick (float deltaTime)
         {
-            time += deltaTime;
-            if ( time > goal )
+            currentTime += deltaTime;
+            if ( currentTime > goalTime )
             {
                 Fire();
             }
